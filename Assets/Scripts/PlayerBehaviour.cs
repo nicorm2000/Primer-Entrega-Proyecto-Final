@@ -10,14 +10,17 @@ public class PlayerBehaviour : MonoBehaviour
     private int isAttackingHash;
     [SerializeField] float speedWalking = 4f;
     [SerializeField] float speedRunning = 7f;
+    [SerializeField] float jumpForce;
     [SerializeField] float mouseXAxis;
     private bool isCollide = false;
     [SerializeField] float countTime = 0;
-    [SerializeField] GameObject[] spawner;
     public GameObject[] spawnerArray;
+    private Rigidbody rb;
+    [SerializeField] LayerMask groundLayer;
     void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isAttackingHash = Animator.StringToHash("isAttacking");
@@ -27,6 +30,15 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         AnimateCharacter();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isGrounded)
+            {
+                Jump();
+                animator.SetTrigger("JUMP");
+
+            }
+        }
     }
 
     private void AnimateCharacter()
@@ -93,6 +105,22 @@ public class PlayerBehaviour : MonoBehaviour
         {
             animator.SetBool(isAttackingHash, false);
         }
+    }
+    private void Jump()
+    {
+        rb.AddForce(0, 1 * jumpForce, 0);
+    }
+
+
+    private bool isGrounded = true;
+
+    private bool IsGrounded()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, 0.5f, groundLayer))
+        {
+            return true;
+        }
+        else return false;
     }
     private void OnCollisionStay(Collision collision)
     {

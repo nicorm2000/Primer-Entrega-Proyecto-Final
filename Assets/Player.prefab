@@ -346,12 +346,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedWalking: 4
   speedRunning: 7
+  jumpForce: 0
   mouseXAxis: 0
   countTime: 0
-  spawner: []
   spawnerArray:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6491482609912052638, guid: 44a9253fa18fe694ba79a4b4d0405899, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1585249723863812267
 GameObject:
   m_ObjectHideFlags: 0
