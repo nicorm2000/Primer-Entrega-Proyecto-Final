@@ -5,20 +5,25 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     Animator animator;
-    int isWalkingHash;
-    int isRunningHash;
-    [SerializeField] float speedWalking = 5f;
-    [SerializeField] float speedRunning = 10f;
+    private int isWalkingHash;
+    private int isRunningHash;
+    private int isAttackingHash;
+    [SerializeField] float speedWalking = 4f;
+    [SerializeField] float speedRunning = 7f;
     [SerializeField] float mouseXAxis;
-    [SerializeField] float rotationSpeed = 10f;
+    private bool isCollide = false;
+    [SerializeField] float countTime = 0;
+    [SerializeField] GameObject[] spawner;
+    public GameObject[] spawnerArray;
     void Start()
     {
         animator = GetComponent<Animator>();
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
+        isAttackingHash = Animator.StringToHash("isAttacking");
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         AnimateCharacter();
@@ -28,33 +33,42 @@ public class PlayerBehaviour : MonoBehaviour
     {
         bool isWalking = animator.GetBool(isWalkingHash);
         bool forwardPressed = Input.GetKey("w");
+        bool backwardPressed = Input.GetKey("s");
         bool isRunning = animator.GetBool(isRunningHash);
         bool runningPressed = Input.GetKey("left shift");
-        Move(speedWalking);
-        RotatePlayer();
 
-        if (!isWalking && forwardPressed)
+        if (forwardPressed || backwardPressed)
         {
-            animator.SetBool(isWalkingHash, true);
             Move(speedWalking);
         }
-        else if (isWalking && !forwardPressed)
+        if (forwardPressed && runningPressed)
+        {
+            Move(speedRunning);
+        }
+
+        RotatePlayer();
+
+        if (!isWalking && (forwardPressed || backwardPressed))
+        {
+            animator.SetBool(isWalkingHash, true);
+        }
+        else if (isWalking && (!forwardPressed || !backwardPressed))
         {
             animator.SetBool(isWalkingHash, false);
-            //Move(0);
         }
-        else if (!isRunning && (runningPressed && forwardPressed))
+
+        if (!isRunning && (runningPressed && forwardPressed))
         {
             animator.SetBool(isRunningHash, true);
             Move(speedRunning);
+            Attack();
         }
         else if (isRunning && (!runningPressed || !forwardPressed))
         {
             animator.SetBool(isRunningHash, false);
-            //Move(0);
         }
     }
-     private void Move(float speed)
+    private void Move(float speed)
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -66,5 +80,59 @@ public class PlayerBehaviour : MonoBehaviour
         mouseXAxis += Input.GetAxis("Mouse X");
         Quaternion newrotation = Quaternion.Euler(0, mouseXAxis, 0);
         transform.rotation = newrotation;
+    }
+    private void Attack()
+    {
+        bool isAttacking = animator.GetBool(isAttackingHash);
+        bool attacking = Input.GetKey(KeyCode.Mouse1);
+        if (!isAttacking)
+        {
+            animator.SetBool(isAttackingHash, true);
+        }
+        if (isAttacking)
+        {
+            animator.SetBool(isAttackingHash, false);
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        int enemyIndex = spawnerArray.Length;
+        
+        if (collision.gameObject.CompareTag("Spawner") && !isCollide)
+        {
+            countTime += Time.deltaTime;
+            if (countTime > 2 && spawnerArray[0])
+            {
+                Destroy(spawnerArray[0]);
+            }
+            if (countTime > 2 && spawnerArray[1])
+            {
+                Destroy(spawnerArray[1]);
+            }
+        }
+        if (collision.gameObject.CompareTag("Spawner1") && !isCollide)
+        {
+            countTime += Time.deltaTime;
+            if (countTime > 2 && spawnerArray[0])
+            {
+                Destroy(spawnerArray[0]);
+            }
+            if (countTime > 2 && spawnerArray[1])
+            {
+                Destroy(spawnerArray[1]);
+            }
+        }
+        if (collision.gameObject.CompareTag("Spawner2") && !isCollide)
+        {
+            countTime += Time.deltaTime;
+            if (countTime > 2 && spawnerArray[0])
+            {
+                Destroy(spawnerArray[0]);
+            }
+            if (countTime > 2 && spawnerArray[1])
+            {
+                Destroy(spawnerArray[1]);
+            }
+        }
     }
 }

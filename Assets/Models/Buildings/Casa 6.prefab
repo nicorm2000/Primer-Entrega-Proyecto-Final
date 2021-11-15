@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8758226781455323246}
   - component: {fileID: 1263072610839899008}
   - component: {fileID: 5503611317658533891}
+  - component: {fileID: -2623139376060697718}
   m_Layer: 0
   m_Name: Casa 6
   m_TagString: Untagged
@@ -89,3 +90,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-2623139376060697718
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326844048605830006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1193.635, y: 2008.3812, z: 1499.3827}
+  m_Center: {x: -29.43701, y: 1002.2365, z: 389.528}
