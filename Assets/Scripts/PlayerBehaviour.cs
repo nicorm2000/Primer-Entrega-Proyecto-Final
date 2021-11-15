@@ -10,13 +10,15 @@ public class PlayerBehaviour : MonoBehaviour
     private int isAttackingHash;
     [SerializeField] float speedWalking = 4f;
     [SerializeField] float speedRunning = 7f;
-    [SerializeField] float jumpForce;
+    [SerializeField] float jumpForce = 10f;
     [SerializeField] float mouseXAxis;
     private bool isCollide = false;
     [SerializeField] float countTime = 0;
     public GameObject[] spawnerArray;
     private Rigidbody rb;
     [SerializeField] LayerMask groundLayer;
+
+    private GameObject Spawner;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -32,12 +34,12 @@ public class PlayerBehaviour : MonoBehaviour
         AnimateCharacter();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isGrounded)
+            if(IsGrounded())
             {
                 Jump();
-                animator.SetTrigger("JUMP");
-
             }
+            
+
         }
     }
 
@@ -73,7 +75,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             animator.SetBool(isRunningHash, true);
             Move(speedRunning);
-            Attack();
+            //Attack();
         }
         else if (isRunning && (!runningPressed || !forwardPressed))
         {
@@ -124,42 +126,47 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        int enemyIndex = spawnerArray.Length;
         
         if (collision.gameObject.CompareTag("Spawner") && !isCollide)
         {
             countTime += Time.deltaTime;
-            if (countTime > 2 && spawnerArray[0])
+            if (countTime > 2 && collision.gameObject.name == "Spawner")
             {
+                countTime = 0;
                 Destroy(spawnerArray[0]);
             }
-            if (countTime > 2 && spawnerArray[1])
+            if (countTime > 2 && collision.gameObject.name == "Spawner1")
             {
+                countTime = 0;
                 Destroy(spawnerArray[1]);
             }
         }
         if (collision.gameObject.CompareTag("Spawner1") && !isCollide)
         {
             countTime += Time.deltaTime;
-            if (countTime > 2 && spawnerArray[0])
+            if (countTime > 2 && collision.gameObject.name == "Spawner2")
             {
-                Destroy(spawnerArray[0]);
+                countTime = 0;
+                Destroy(spawnerArray[2]);
             }
-            if (countTime > 2 && spawnerArray[1])
+            if (countTime > 2 && collision.gameObject.name == "Spawner3")
             {
-                Destroy(spawnerArray[1]);
+                countTime = 0;
+                Destroy(spawnerArray[3]);
             }
         }
         if (collision.gameObject.CompareTag("Spawner2") && !isCollide)
         {
             countTime += Time.deltaTime;
-            if (countTime > 2 && spawnerArray[0])
+            if (countTime > 2 && collision.gameObject.name == "Spawner4")
             {
-                Destroy(spawnerArray[0]);
+                countTime = 0;
+                Destroy(spawnerArray[4]);
             }
-            if (countTime > 2 && spawnerArray[1])
+            if (countTime > 2 && collision.gameObject.name == "Spawner5")
             {
-                Destroy(spawnerArray[1]);
+                countTime = 0;
+                Destroy(spawnerArray[5]);
             }
         }
     }
