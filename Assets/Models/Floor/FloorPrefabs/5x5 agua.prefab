@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4571706639947946599}
   - component: {fileID: 1771323946033262253}
   - component: {fileID: -4772127327685729443}
+  - component: {fileID: 5286905433153750107}
   m_Layer: 0
   m_Name: 5x5 agua
   m_TagString: Untagged
@@ -96,3 +97,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6492453565398881485, guid: 62410302d0d63a64699f519f8b86f0f8, type: 3}
+--- !u!65 &5286905433153750107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258391616188518264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.99999964, z: 2}
+  m_Center: {x: 0, y: 0.49999982, z: 0}

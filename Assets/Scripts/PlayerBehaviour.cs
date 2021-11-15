@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     private int isWalkingHash;
     private int isRunningHash;
     private int isAttackingHash;
+    private int isJumpingHash;
     [SerializeField] float speedWalking = 4f;
     [SerializeField] float speedRunning = 7f;
     [SerializeField] float jumpForce = 10f;
@@ -26,6 +27,7 @@ public class PlayerBehaviour : MonoBehaviour
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
         isAttackingHash = Animator.StringToHash("isAttacking");
+        isJumpingHash = Animator.StringToHash("isJumping");
 
     }
 
@@ -34,9 +36,10 @@ public class PlayerBehaviour : MonoBehaviour
         AnimateCharacter();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(IsGrounded())
+            if (IsGrounded())
             {
                 Jump();
+                animator.SetBool(isJumpingHash, true);
             }
             
 
@@ -113,8 +116,6 @@ public class PlayerBehaviour : MonoBehaviour
         rb.AddForce(0, 1 * jumpForce, 0);
     }
 
-
-    private bool isGrounded = true;
 
     private bool IsGrounded()
     {
