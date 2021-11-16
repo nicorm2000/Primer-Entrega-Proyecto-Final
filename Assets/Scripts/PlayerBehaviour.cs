@@ -7,27 +7,21 @@ public class PlayerBehaviour : MonoBehaviour
     Animator animator;
     private int isWalkingHash;
     private int isRunningHash;
-    private int isAttackingHash;
-    private int isJumpingHash;
     [SerializeField] float speedWalking = 4f;
     [SerializeField] float speedRunning = 7f;
     [SerializeField] float jumpForce = 10f;
     [SerializeField] float mouseXAxis;
     private bool isCollide = false;
     [SerializeField] float countTime = 0;
-    public GameObject[] spawnerArray;
+    [SerializeField] GameObject[] spawnerArray;
     private Rigidbody rb;
     [SerializeField] LayerMask groundLayer;
-
-    private GameObject Spawner;
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
-        isAttackingHash = Animator.StringToHash("isAttacking");
-        isJumpingHash = Animator.StringToHash("isJumping");
 
     }
 
@@ -39,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (IsGrounded())
             {
                 Jump();
-                animator.SetBool(isJumpingHash, true);
+                
             }
             
 
@@ -78,7 +72,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             animator.SetBool(isRunningHash, true);
             Move(speedRunning);
-            //Attack();
         }
         else if (isRunning && (!runningPressed || !forwardPressed))
         {
@@ -98,19 +91,7 @@ public class PlayerBehaviour : MonoBehaviour
         Quaternion newrotation = Quaternion.Euler(0, mouseXAxis, 0);
         transform.rotation = newrotation;
     }
-    private void Attack()
-    {
-        bool isAttacking = animator.GetBool(isAttackingHash);
-        bool attacking = Input.GetKey(KeyCode.Mouse1);
-        if (!isAttacking)
-        {
-            animator.SetBool(isAttackingHash, true);
-        }
-        if (isAttacking)
-        {
-            animator.SetBool(isAttackingHash, false);
-        }
-    }
+
     private void Jump()
     {
         rb.AddForce(0, 1 * jumpForce, 0);
@@ -170,5 +151,6 @@ public class PlayerBehaviour : MonoBehaviour
                 Destroy(spawnerArray[5]);
             }
         }
+        
     }
 }

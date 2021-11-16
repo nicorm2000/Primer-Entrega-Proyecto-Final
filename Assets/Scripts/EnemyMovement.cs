@@ -6,12 +6,16 @@ public class EnemyMovement : MonoBehaviour
 {
     private float speedEnemy;
     private GameObject player;
+    private GameObject enemiesPrefab;
     enum EnemiesTypes { Fast, Medium, Slow }
     [SerializeField] private EnemiesTypes enemies;
+
+    private int countSpawner = 200;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        enemiesPrefab = GameObject.FindWithTag("Enemy");
     }
 
     void Update()
@@ -31,6 +35,7 @@ public class EnemyMovement : MonoBehaviour
             default:
                 break;
         }
+        DestroyEnemies();
     }
 
     private void MoveTowards(float speed)
@@ -44,5 +49,16 @@ public class EnemyMovement : MonoBehaviour
         Vector3 direction = lookObject.transform.position - transform.position;
         Quaternion newQuaternion = Quaternion.LookRotation(direction);
         transform.rotation = newQuaternion;
+    }
+
+    private void DestroyEnemies()
+    {
+        countSpawner -= 1;
+        Debug.Log(countSpawner);
+        if (countSpawner <= 0)
+        {
+
+            Destroy(enemiesPrefab);
+        }
     }
 }

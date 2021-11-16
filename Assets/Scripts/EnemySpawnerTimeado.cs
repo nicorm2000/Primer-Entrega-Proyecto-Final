@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnerTimeado : MonoBehaviour
 {
     public GameObject[] spawnerArray;
-    [SerializeField] GameObject[] enemyPrefabs;
+    public GameObject[] enemyPrefabs;
     private GameObject spawner;
     private GameObject spawner1;
     private GameObject spawner2;

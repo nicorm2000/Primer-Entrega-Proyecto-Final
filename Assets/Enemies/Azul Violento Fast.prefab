@@ -1005,7 +1005,7 @@ GameObject:
   - component: {fileID: 873011942554382372}
   m_Layer: 0
   m_Name: Azul Violento Fast
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
