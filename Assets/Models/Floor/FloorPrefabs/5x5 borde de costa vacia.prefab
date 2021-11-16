@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2292211961979639652}
   - component: {fileID: 4047440752624690094}
   - component: {fileID: 1998384784962415625}
+  - component: {fileID: 8567917162891481681}
   m_Layer: 0
   m_Name: 5x5 borde de costa vacia
   m_TagString: Untagged
@@ -97,3 +98,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5362685484406570729, guid: b94f125d0b85f4146b6ee3fd9221e8f8, type: 3}
+--- !u!65 &8567917162891481681
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2534288109060604539}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.5, z: 0}
